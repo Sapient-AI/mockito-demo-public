@@ -1,0 +1,67 @@
+---
+modelFingerprint: "3E8E146AB4C17ED3A35199D3DE7695BB"
+targetClass:
+  fullClassName: "ai.sapient.test.commons.samples.TestCommonsExample"
+methods:
+- method:
+    name: "add"
+    signature: "double add(double a, double b)"
+    returnType: "double"
+    parameters:
+    - name: "a"
+      value:
+        sapientType: "BASIC"
+        valueType: "double"
+    - name: "b"
+      value:
+        sapientType: "BASIC"
+        valueType: "double"
+    instructionFingerprint: "ACBB74ED073B0212DF421066D90D083C"
+  paths:
+  - pathId: "path1"
+    testPathName: "addTest"
+    constructorSignature: "<init>() : void"
+    modelFingerprint: "79A095F456BD069E939E61AE3E7FA494"
+    problemWasSolvedByProver: true
+    inputParameters:
+    - type: "CONSTRUCTOR"
+      modelFingerprint: "4DB0F57EEFC6BBF1691C61D6F11B96D4"
+      valueUuid: "target"
+    - type: "INPUT"
+      name: "a"
+      modelFingerprint: "277ED7C97E52F3C4513A1FB5B71ED0EB"
+      valueUuid: "a"
+    - type: "INPUT"
+      name: "b"
+      modelFingerprint: "AF9C7661AA5A054883F6B9008346664F"
+      valueUuid: "b"
+    - type: "RESULT"
+      name: "result"
+      modelFingerprint: "4D56BD0C4347485E3A3CFB4FC2CA0B87"
+      valueUuid: "double1"
+    uuid: "2f52d914-224e-3cf8-a2e5-c61089a0f6f4"
+    disabled: false
+    allValues:
+    - sapientType: "OBJECT"
+      content: !<new>
+        target: "ai.sapient.test.commons.samples.TestCommonsExample"
+        parameters: []
+        privateConstructor: false
+        createdByTargetCode: false
+      valueType: "ai.sapient.test.commons.samples.TestCommonsExample"
+      uuid: "target"
+    - sapientType: "BASIC"
+      content: !<regular>
+        value: 0.0
+      valueType: "double"
+      uuid: "a"
+    - sapientType: "BASIC"
+      content: !<regular>
+        value: 0.0
+      valueType: "double"
+      uuid: "b"
+    - sapientType: "BASIC"
+      content: !<regular>
+        value: 0.0
+      valueType: "double"
+      uuid: "double1"
