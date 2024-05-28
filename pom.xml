@@ -91,53 +91,108 @@
             <artifactId>snakeyaml</artifactId>
             <version>2.2</version>
         </dependency>
-        <dependency>
-            <groupId>ai.sapient.test</groupId>
-            <artifactId>test-generator-fat</artifactId>
-            <version>0.1-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>/Users/bhuvan/product/test-generator/build/libs/test-generator-fat-0.1-SNAPSHOT.jar</systemPath>
-        </dependency>
     </dependencies>
+
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>17</source>
-                    <target>17</target>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.0.0</version>
+
+                <executions>
+
+                    <execution>
+                        <id>sapient-cli-tests-generate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>ai.sapient.unit.SapientCLITestGenerator</mainClass>
+                            <arguments>
+                                <argument>${project.basedir}</argument>
+                                <argument>${project.artifactId}</argument>
+                                <argument>${testingFramework}</argument>
+                                <argument>5.9</argument>
+                                <argument>${project.build.testSourceDirectory}</argument>
+                                <argument>${sourceBranch}</argument>
+                                <argument>${targetBranch}</argument>
+                                <argument>${runTestForAllClasses}</argument>
+                                <argument>yaml-and-test-generation</argument>
+                            </arguments>
+                            <classpathScope>test</classpathScope>
+                            <additionalClasspathElements>
+                                <additionalClasspathElement>${project.basedir}/sapient-cli-test-generation-exec-fat-0.1-SNAPSHOT.jar</additionalClasspathElement>
+                            </additionalClasspathElements>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>sapient-cli-tests-execute</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>ai.sapient.unit.SapientCLITestGenerator</mainClass>
+                            <arguments>
+                                <argument>${project.basedir}</argument>
+                                <argument>${project.artifactId}</argument>
+                                <argument>${testingFramework}</argument>
+                                <argument>5.9</argument>
+                                <argument>${project.build.testSourceDirectory}</argument>
+                                <argument>${sourceBranch}</argument>
+                                <argument>${targetBranch}</argument>
+                                <argument>${runTestForAllClasses}</argument>
+                                <argument>compile-and-execute</argument>
+                            </arguments>
+                            <classpathScope>test</classpathScope>
+                            <additionalClasspathElements>
+                                <additionalClasspathElement>${project.basedir}/sapient-cli-test-generation-exec-fat-0.1-SNAPSHOT.jar</additionalClasspathElement>
+                            </additionalClasspathElements>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
                 <executions>
                     <execution>
-                        <id>runWithExec</id>
+                        <phase>initialize</phase>
                         <goals>
-                            <goal>exec</goal>
+                            <goal>read-project-properties</goal>
                         </goals>
+                        <configuration>
+                            <files>
+                                <file>environment.properties</file>
+                            </files>
+                        </configuration>
                     </execution>
                 </executions>
-
-                <configuration>
-                    <executable>java</executable>
-                    <classpathScope>compile</classpathScope>
-                    <arguments>
-                        <argument>-classpath</argument>
-                        <classpath/>
-                        <argument>ai.sapient.test.generator.UnitTestGeneratorMain</argument>
-                        <argument>./</argument>
-                        <argument>JUnitPlatformTestFramework</argument>
-                        <argument>src/main/java/Add/AddInputParameters.yaml</argument>
-                        <argument>17</argument>
-                        <argument>5.10.2</argument>
-                    </arguments>
-                </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>sapient-cli-tests</id>
+            <activation>
+                <property>
+                    <name>runSapientCliTests</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <properties>
+                <sourceBranch>bhuvan/maven-generate-from-yaml</sourceBranch>
+                <targetBranch>main</targetBranch>
+                <runTestForAllClasses>false</runTestForAllClasses>
+                <root.basedir>${basedir}</root.basedir>
+            </properties>
+        </profile>
+    </profiles>
 </project>
