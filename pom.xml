@@ -95,6 +95,7 @@
 
     <build>
         <plugins>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -112,8 +113,8 @@
                             <mainClass>ai.sapient.unit.SapientCLITestGenerator</mainClass>
                             <arguments>
                                 <argument>${project.basedir}</argument>
-                                <argument>${project.artifactId}</argument>
-                                <argument>${testingFramework}</argument>
+                                <argument>${project.name}</argument>
+                                <argument>JUnitPlatformTestFramework</argument>
                                 <argument>5.9</argument>
                                 <argument>${project.build.testSourceDirectory}</argument>
                                 <argument>${sourceBranch}</argument>
@@ -124,7 +125,15 @@
                             <classpathScope>test</classpathScope>
                             <additionalClasspathElements>
                                 <additionalClasspathElement>${project.basedir}/sapient-cli-test-generation-exec-fat-0.1-SNAPSHOT.jar</additionalClasspathElement>
+                                <additionalClasspathElement>${project.build}</additionalClasspathElement>
+                                <additionalClasspathElement>${project.build.testOutputDirectory}</additionalClasspathElement>
                             </additionalClasspathElements>
+                            <systemProperties>
+                                <property>
+                                    <key>java.class.path</key>
+                                    <value>${project.build.sourceDirectory}:${project.build.testOutputDirectory}:${root.basedir}/sapient-cli-test-generation-exec-fat-0.1-SNAPSHOT.jar</value>
+                                </property>
+                            </systemProperties>
                         </configuration>
                     </execution>
 
@@ -175,6 +184,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 
@@ -189,7 +199,7 @@
             </activation>
             <properties>
                 <sourceBranch>bhuvan/maven-generate-from-yaml</sourceBranch>
-                <targetBranch>main</targetBranch>
+                <targetBranch>master</targetBranch>
                 <runTestForAllClasses>false</runTestForAllClasses>
                 <root.basedir>${basedir}</root.basedir>
             </properties>
