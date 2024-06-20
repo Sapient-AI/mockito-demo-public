@@ -239,6 +239,8 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- byte-buddy is an optional dependency. Mockito brings it, but an old version can cause problems.
+          We need at least 1.12.9 -->
         <dependency>
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy</artifactId>
