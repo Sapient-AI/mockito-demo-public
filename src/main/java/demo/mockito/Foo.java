@@ -5,16 +5,16 @@ public class Foo {
 
 
     public void example(int a, int b, int a1, int b1, int c, int d, int a2, int b2, int e, int f, int n, int h,int z) {
-        if (a == b) {
-            if (a1 == b1) {
+        if (a != b) {
+            if (a1 == 10) {
                 fiddle();
             } else if (a2 == b2) {
                 fiddle();
             } else {
                 fiddle();
             }
-        } else if (c == d) {
-            while (c == d) {
+        } else if (c != d) {
+            while (c != d) {
                 fiddle();
                 if (c>0) {
                     return;
@@ -33,6 +33,9 @@ public class Foo {
                     fiddle();
                     break;
                 case 3:
+                    fiddle();
+                    break;
+                case 4:
                     fiddle();
                     break;
                 default:

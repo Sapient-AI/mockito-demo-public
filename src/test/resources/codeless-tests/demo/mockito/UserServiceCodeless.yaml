@@ -1,0 +1,389 @@
+---
+class: "demo.mockito.UserService"
+fields:
+- "PasswordEncoder passwordEncoder"
+- "UserRepository userRepository"
+imports:
+- "demo.mockito.UserRepository"
+- "demo.mockito.PasswordEncoder"
+- "java.lang.String"
+- "java.lang.IllegalArgumentException"
+- "demo.mockito.User"
+- "java.util.List"
+- "java.util.ArrayList"
+- "void"
+- "java.lang.Object"
+methods:
+- targetMethod: "isValidUser(String userId, String password): boolean result"
+  tests:
+  - name: "isValidUserWhenUserIdIsNullThrowsIllegalArgumentException"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - userId: "NULL"
+    - password: "password1"
+    - userRepository: "MOCK"
+    - passwordEncoder: "MOCK"
+    - uniqueUuid1: "Invalid UserId"
+    - illegalArgumentException: "THROW NEW IllegalArgumentException(String uniqueUuid1)"
+    - result: "REF illegalArgumentException"
+    branches:
+    - expression: "userId == null : true"
+      lineNumber: 19
+  - name: "isValidUserWhenUserIsNull"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - userId: "userId1"
+    - password: "password1"
+    - userRepository: "MOCK"
+      mock-expressions:
+      - "findById(String userId): User user"
+    - user: "NULL"
+    - passwordEncoder: "MOCK"
+    - expectedResult: "false"
+    - result: "REF expectedResult"
+    branches:
+    - expression: "userId == null : false"
+      lineNumber: 19
+    - expression: "user == null : true"
+      lineNumber: 24
+  - name: "isValidUserWhenEncodedPasswordEqualsUserGetPasswordHash"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - userId: "userId1"
+    - password: "password1"
+    - userRepository: "MOCK"
+      mock-expressions:
+      - "findById(String userId): User user"
+    - enabled: "true"
+    - passwordHash: "A"
+    - user: "NEW User()"
+      fields:
+      - "boolean enabled = REF enabled"
+      - "String passwordHash = REF passwordHash"
+    - passwordEncoder: "MOCK"
+      mock-expressions:
+      - "encode(String password): String string"
+    - string: "A"
+    - boolean2: "true"
+    - result: "REF boolean2"
+    branches:
+    - expression: "userId == null : false"
+      lineNumber: 19
+    - expression: "user == null : false"
+      lineNumber: 24
+    - expression: "user.isEnabled() : true"
+      lineNumber: 27
+    - expression: "encodedPassword.equals(user.getPasswordHash()) : true"
+      lineNumber: 29
+  - name: "isValidUserWhenEncodedPasswordNotEqualsUserGetPasswordHash"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - userId: "userId1"
+    - password: "password1"
+    - userRepository: "MOCK"
+      mock-expressions:
+      - "findById(String userId): User user"
+    - enabled: "true"
+    - passwordHash: "B"
+    - user: "NEW User()"
+      fields:
+      - "boolean enabled = REF enabled"
+      - "String passwordHash = REF passwordHash"
+    - passwordEncoder: "MOCK"
+      mock-expressions:
+      - "encode(String password): String string"
+    - string: "A"
+    - boolean2: "false"
+    - result: "REF boolean2"
+    branches:
+    - expression: "userId == null : false"
+      lineNumber: 19
+    - expression: "user == null : false"
+      lineNumber: 24
+    - expression: "user.isEnabled() : true"
+      lineNumber: 27
+    - expression: "encodedPassword.equals(user.getPasswordHash()) : false"
+      lineNumber: 29
+  - name: "isValidUserWhenUserNotEqualsBhuvan"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - userId: "userId1"
+    - password: "password1"
+    - userRepository: "MOCK"
+      mock-expressions:
+      - "findById(String userId): User user"
+    - user: "MOCK"
+      mock-expressions:
+      - "isEnabled(): boolean enabled"
+    - enabled: "false"
+    - passwordEncoder: "MOCK"
+    - expectedResult: "false"
+    - result: "REF expectedResult"
+    branches:
+    - expression: "userId == null : false"
+      lineNumber: 19
+    - expression: "user == null : false"
+      lineNumber: 24
+    - expression: "user.isEnabled() : false"
+      lineNumber: 27
+    - expression: "user.equals(\\\"bhuvan\\\") : false"
+      lineNumber: 31
+    failureReason:
+      type: "METHOD_WITHOUT_EXPRESSION_SUPPORT"
+      details: "Expression missing: demo.mockito.User.equals(java.lang.String) : boolean"
+  - name: "isValidUserWhenUserEqualsBhuvanAndEncodedPasswordEqualsUserGetPasswordHash"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - userId: "userId1"
+    - password: "password1"
+    - userRepository: "MOCK"
+      mock-expressions:
+      - "findById(String userId): User user"
+    - user: "MOCK"
+      mock-expressions:
+      - "isEnabled(): boolean enabled"
+      - "getPasswordHash(): String string2"
+    - passwordEncoder: "MOCK"
+      mock-expressions:
+      - "encode(String password): String string"
+    - string: "A"
+    - enabled: "false"
+    - string2: "A"
+    - boolean3: "true"
+    - result: "REF boolean3"
+    branches:
+    - expression: "userId == null : false"
+      lineNumber: 19
+    - expression: "user == null : false"
+      lineNumber: 24
+    - expression: "user.isEnabled() : false"
+      lineNumber: 27
+    - expression: "user.equals(\\\"bhuvan\\\") : true"
+      lineNumber: 31
+    - expression: "encodedPassword.equals(user.getPasswordHash()) : true"
+      lineNumber: 33
+    failureReason:
+      type: "METHOD_WITHOUT_EXPRESSION_SUPPORT"
+      details: "Expression missing: demo.mockito.User.equals(java.lang.String) : boolean"
+  - name: "isValidUserWhenUserEqualsBhuvanAndEncodedPasswordNotEqualsUserGetPasswordHash"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - userId: "userId1"
+    - password: "password1"
+    - userRepository: "MOCK"
+      mock-expressions:
+      - "findById(String userId): User user"
+    - user: "MOCK"
+      mock-expressions:
+      - "isEnabled(): boolean enabled"
+      - "getPasswordHash(): String string2"
+    - passwordEncoder: "MOCK"
+      mock-expressions:
+      - "encode(String password): String string"
+    - string: "A"
+    - enabled: "false"
+    - string2: "B"
+    - boolean3: "false"
+    - result: "REF boolean3"
+    branches:
+    - expression: "userId == null : false"
+      lineNumber: 19
+    - expression: "user == null : false"
+      lineNumber: 24
+    - expression: "user.isEnabled() : false"
+      lineNumber: 27
+    - expression: "user.equals(\\\"bhuvan\\\") : true"
+      lineNumber: 31
+    - expression: "encodedPassword.equals(user.getPasswordHash()) : false"
+      lineNumber: 33
+    failureReason:
+      type: "METHOD_WITHOUT_EXPRESSION_SUPPORT"
+      details: "Expression missing: demo.mockito.User.equals(java.lang.String) : boolean"
+  sourceCodeSignature: "boolean isValidUser(String userId, String password)"
+- targetMethod: "findById(String id): User result"
+  tests:
+  - name: "findByIdTest"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - id: "id1"
+    - userRepository: "MOCK"
+      mock-expressions:
+      - "findById(String id): User user"
+    - user: "MOCK"
+    - passwordEncoder: "MOCK"
+    - result: "REF user"
+  sourceCodeSignature: "User findById(String id)"
+- targetMethod: "findByIds(List<String> ids): List<User> result"
+  tests:
+  - name: "findByIdsTest"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - string: "idsItem1"
+    - ids: "NEW ArrayList<String>()"
+      elements:
+      - "REF string"
+    - userRepository: "MOCK"
+      mock-expressions:
+      - "findById(String string): User user"
+    - user: "MOCK"
+    - passwordEncoder: "MOCK"
+    - object: "NEW List<User>()"
+      elements:
+      - "REF user"
+    - result: "REF object"
+  sourceCodeSignature: "List<User> findByIds(List<String> ids)"
+- targetMethod: "create(User user): void result"
+  tests:
+  - name: "createTest"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - user: "MOCK"
+    - userRepository: "MOCK"
+      mock-expressions:
+      - "create(User user): User user2"
+    - user2: "MOCK"
+    - passwordEncoder: "MOCK"
+    - expectedResult: "VOID"
+    - result: "REF expectedResult"
+  sourceCodeSignature: "void create(User user)"
+- targetMethod: "update(User user): void result"
+  tests:
+  - name: "updateTest"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - user: "MOCK"
+    - userRepository: "MOCK"
+      mock-expressions:
+      - "update(User user): User user2"
+    - user2: "MOCK"
+    - passwordEncoder: "MOCK"
+    - expectedResult: "VOID"
+    - result: "REF expectedResult"
+  sourceCodeSignature: "void update(User user)"
+- targetMethod: "greet(): String result"
+  tests:
+  - name: "greetTest"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - userRepository: "MOCK"
+    - passwordEncoder: "MOCK"
+    - expectedResult: "Hello, I'm UserService"
+    - result: "REF expectedResult"
+  sourceCodeSignature: "String greet()"
+- targetMethod: "findAll(): List<User> result"
+  tests:
+  - name: "findAllTest"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - userRepository: "MOCK"
+    - passwordEncoder: "MOCK"
+    - list: "NULL"
+    - result: "REF list"
+  sourceCodeSignature: "List<User> findAll()"
+- targetMethod: "findAllIds(): List<String> result"
+  tests:
+  - name: "findAllIdsTest"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - userRepository: "MOCK"
+      mock-expressions:
+      - "findAll(): List<User> list"
+    - id: "id1"
+    - user: "NEW User()"
+      fields:
+      - "String id = REF id"
+    - list: "NEW ArrayList<User>()"
+      elements:
+      - "REF user"
+    - passwordEncoder: "MOCK"
+    - object: "NEW List<String>()"
+      elements:
+      - "REF id"
+    - result: "REF object"
+  sourceCodeSignature: "List<String> findAllIds()"
+- targetMethod: "bhuvanReGenerateTest(double a, double b): Object result"
+  tests:
+  - name: "bhuvanReGenerateTestWhenAEqualsB"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - a: "1.0"
+    - b: "1.0"
+    - userRepository: "MOCK"
+    - passwordEncoder: "MOCK"
+    - double: "1.0"
+    - result: "REF double"
+    branches:
+    - expression: "a == b : true"
+      lineNumber: 68
+  - name: "bhuvanReGenerateTestWhenBPlusAEqualsA"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - a: "-1.0"
+    - b: "0.0"
+    - userRepository: "MOCK"
+    - passwordEncoder: "MOCK"
+    - double2: "0.0"
+    - result: "REF double2"
+    branches:
+    - expression: "a == b : false"
+      lineNumber: 68
+    - expression: "b + a == a : true"
+      lineNumber: 70
+  - name: "bhuvanReGenerateTestWhenBPlusANotEqualsA"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - a: "-1.0"
+    - b: "-0.5"
+    - userRepository: "MOCK"
+    - passwordEncoder: "MOCK"
+    - double3: "-1.5"
+    - result: "REF double3"
+    branches:
+    - expression: "a == b : false"
+      lineNumber: 68
+    - expression: "b + a == a : false"
+      lineNumber: 70
+  sourceCodeSignature: "Object bhuvanReGenerateTest(double a, double b)"
+- targetMethod: "bhuvanAgain(double a, double b): Object result"
+  tests:
+  - name: "bhuvanAgainWhenAGreaterThanB"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - a: "2.0"
+    - b: "1.0"
+    - userRepository: "MOCK"
+    - passwordEncoder: "MOCK"
+    - double: "2.0"
+    - result: "REF double"
+    branches:
+    - expression: "a > b : true"
+      lineNumber: 79
+  - name: "bhuvanAgainWhenBPlusALessThanA"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - a: "-0.5"
+    - b: "-0.5"
+    - userRepository: "MOCK"
+    - passwordEncoder: "MOCK"
+    - double2: "-0.5"
+    - result: "REF double2"
+    branches:
+    - expression: "a > b : false"
+      lineNumber: 79
+    - expression: "b + a < a : true"
+      lineNumber: 81
+  - name: "bhuvanAgainWhenBPlusANotLessThanA"
+    target: "NEW UserService(UserRepository userRepository,PasswordEncoder passwordEncoder)"
+    variables:
+    - a: "0.0"
+    - b: "0.5"
+    - userRepository: "MOCK"
+    - passwordEncoder: "MOCK"
+    - double3: "-0.5"
+    - result: "REF double3"
+    branches:
+    - expression: "a > b : false"
+      lineNumber: 79
+    - expression: "b + a < a : false"
+      lineNumber: 81
+  sourceCodeSignature: "Object bhuvanAgain(double a, double b)"

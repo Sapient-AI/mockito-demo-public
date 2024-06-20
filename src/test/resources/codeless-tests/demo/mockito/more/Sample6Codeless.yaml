@@ -1,0 +1,37 @@
+---
+class: "demo.mockito.more.Sample6"
+fields: []
+imports:
+- "java.util.Queue"
+- "java.lang.String"
+- "java.util.ArrayDeque"
+- "java.util.Date"
+- "java.text.ParseException"
+- "java.text.SimpleDateFormat"
+methods:
+- targetMethod: "addElements(Queue<String> stringSet): Queue<String> result"
+  tests:
+  - name: "addElementsTest"
+    target: "NEW Sample6()"
+    variables:
+    - stringSet: "NEW Queue<String>()"
+      elements: []
+    - uniqueUuid1: "aaaa"
+    - uniqueUuid2: "bbbb"
+    - queue: "NEW ArrayDeque<String>()"
+      elements:
+      - "REF uniqueUuid1"
+      - "REF uniqueUuid2"
+    - result: "REF queue"
+  sourceCodeSignature: "Queue<String> addElements(Queue<String> stringSet)"
+- targetMethod: "format(String date) throws ParseException: Date result"
+  tests:
+  - name: "formatTest"
+    target: "NEW Sample6()"
+    variables:
+    - date: "A"
+    - uniqueRUuid1: "MM/dd/yyyy"
+    - simpleDateFormat: "NEW SimpleDateFormat(String uniqueRUuid1)"
+    - date2: "EVAL simpleDateFormat.parse(String date)"
+    - result: "REF date2"
+  sourceCodeSignature: "Date format(String date)"

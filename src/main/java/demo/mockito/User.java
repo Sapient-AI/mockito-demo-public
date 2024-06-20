@@ -53,7 +53,7 @@ public class User implements Comparable<User>, Serializable {
 
     @SuppressWarnings("unused")
     protected String concatIdAndPassword() {
-        return id + passwordHash;
+        return id;
     }
 
     @Override
@@ -69,4 +69,31 @@ public class User implements Comparable<User>, Serializable {
     public int hashCode() {
         return Objects.hash(id, passwordHash, enabled);
     }
+
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public int add2(int a) {
+        return a + 2;
+    }
+
+    public short add3(short a) {
+        return (short) (a + 2);
+    }
+
+    public short add4() {
+        short a = 2;
+        return 0;
+    }
+
+    public byte add5(byte a) {
+        return 0;
+    }
+
+    public byte add6(byte b) {
+        byte a = 7;
+        return (byte) (a + b);
+    }
+
 }

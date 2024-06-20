@@ -1,0 +1,39 @@
+---
+class: "demo.mockito.UserServiceCallInAReturnOfCallInExternalConstructor"
+fields: []
+imports:
+- "java.lang.String"
+- "demo.mockito.UserRepository"
+methods:
+- targetMethod: "getPasswordHash(): String result"
+  tests:
+  - name: "getPasswordHashTest"
+    target: "NEW UserServiceCallInAReturnOfCallInExternalConstructor(UserRepository\
+      \ userRepository)"
+    variables:
+    - userRepository: "MOCK"
+    - string: "return_of_getPasswordHash1"
+    - result: "REF string"
+    failureReason:
+      type: "METHOD_CALL_INSTRUCTION_CONSTRUCTION_FAILURE"
+      source: "this.dependency = new UserServiceDependency2(userRepository);"
+      lineNumber: 11
+      details: "No constructor found to create an object without any exception for\
+        \ class demo.mockito.UserServiceDependency2"
+  sourceCodeSignature: "String getPasswordHash()"
+- targetMethod: "returnMyStringNull(): String result"
+  tests:
+  - name: "returnMyStringNullTest"
+    target: "NEW UserServiceCallInAReturnOfCallInExternalConstructor(UserRepository\
+      \ userRepository)"
+    variables:
+    - userRepository: "MOCK"
+    - fieldString: "NULL"
+    - result: "REF fieldString"
+    failureReason:
+      type: "METHOD_CALL_INSTRUCTION_CONSTRUCTION_FAILURE"
+      source: "this.dependency = new UserServiceDependency2(userRepository);"
+      lineNumber: 11
+      details: "No constructor found to create an object without any exception for\
+        \ class demo.mockito.UserServiceDependency2"
+  sourceCodeSignature: "String returnMyStringNull()"

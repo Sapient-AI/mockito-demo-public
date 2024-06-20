@@ -1,0 +1,344 @@
+---
+class: "demo.mockito.UserController"
+fields:
+- "UserService service"
+imports:
+- "demo.mockito.UserService"
+- "java.lang.String"
+- "demo.mockito.User"
+- "java.lang.Integer"
+- "java.lang.Object"
+- "void"
+- "java.lang.IllegalArgumentException"
+- "java.lang.Exception"
+- "java.util.List"
+methods:
+- targetMethod: "greeting(): String result"
+  tests:
+  - name: "greetingTest"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - service: "MOCK"
+    - string: "NULL"
+    - result: "REF string"
+  sourceCodeSignature: "String greeting()"
+- targetMethod: "findById(String id): User result"
+  tests:
+  - name: "findByIdTest"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - id: "id1"
+    - service: "MOCK"
+      mock-expressions:
+      - "findById(String id): User user"
+    - user: "MOCK"
+    - user2: "NULL"
+    - result: "REF user2"
+  sourceCodeSignature: "User findById(@PathVariable(\\\"id\\\") String id)"
+- targetMethod: "bhuvanTest(Integer a, Integer b, Integer c): Integer result"
+  tests:
+  - name: "bhuvanTestWhenALessThanB"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "1"
+    - b: "2"
+    - c: "0"
+    - service: "MOCK"
+    - result: "REF a"
+    branches:
+    - expression: "a < b : true"
+      lineNumber: 34
+  - name: "bhuvanTestWhenCEqualsB"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "1"
+    - c: "1"
+    - service: "MOCK"
+    - result: "REF c"
+    - b: "REF c"
+    branches:
+    - expression: "a < b : false"
+      lineNumber: 34
+    - expression: "a > b : false"
+      lineNumber: 36
+    - expression: "c == b : true"
+      lineNumber: 36
+  - name: "bhuvanTestWhenAEquals0"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "0"
+    - b: "0"
+    - c: "0"
+    - service: "MOCK"
+    - result: "REF a"
+    branches:
+    - expression: "a < b : false"
+      lineNumber: 34
+    - expression: "a > b : false"
+      lineNumber: 36
+    - expression: "c == b : false"
+      lineNumber: 36
+    - expression: "a == 0 : true"
+      lineNumber: 38
+  - name: "bhuvanTestWhenANotEquals0"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "-1"
+    - b: "-1"
+    - c: "0"
+    - service: "MOCK"
+    - integer: "NULL"
+    - result: "REF integer"
+    branches:
+    - expression: "a < b : false"
+      lineNumber: 34
+    - expression: "a > b : false"
+      lineNumber: 36
+    - expression: "c == b : false"
+      lineNumber: 36
+    - expression: "a == 0 : false"
+      lineNumber: 38
+  sourceCodeSignature: "Integer bhuvanTest(Integer a, Integer b, Integer c)"
+- targetMethod: "add2dasda(double a, double b): double result"
+  tests:
+  - name: "add2dasdaTest"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "1.0"
+    - b: "1.0"
+    - service: "MOCK"
+    - double1: "1.0"
+    - result: "REF double1"
+  sourceCodeSignature: "double add2dasda(double a, double b)"
+- targetMethod: "testregeneratenewpath(double a, double b): double result"
+  tests:
+  - name: "testregeneratenewpathTest"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "0.0"
+    - b: "0.0"
+    - service: "MOCK"
+    - double1: "0.0"
+    - result: "REF double1"
+  sourceCodeSignature: "double testregeneratenewpath(double a, double b)"
+- targetMethod: "testrfsdegeneratenewpath(double a, double b): double result"
+  tests:
+  - name: "testrfsdegeneratenewpathTest"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "0.0"
+    - b: "0.0"
+    - service: "MOCK"
+    - double1: "0.0"
+    - result: "REF double1"
+  sourceCodeSignature: "double testrfsdegeneratenewpath(double a, double b)"
+- targetMethod: "add1(double a, double b): double result"
+  tests:
+  - name: "add1Test"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "0.0"
+    - b: "0.0"
+    - service: "MOCK"
+    - double1: "0.0"
+    - result: "REF double1"
+  sourceCodeSignature: "double add1(double a, double b)"
+- targetMethod: "add2(double a, double b): double result"
+  tests:
+  - name: "add2Test"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "1.0"
+    - b: "1.0"
+    - service: "MOCK"
+    - double2: "1.0"
+    - result: "REF double2"
+  sourceCodeSignature: "double add2(double a, double b)"
+- targetMethod: "add3(double a, double b): double result"
+  tests:
+  - name: "add3WhenAGreaterThanB"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "0.5"
+    - b: "0.0"
+    - service: "MOCK"
+    - double1: "0.5"
+    - result: "REF double1"
+    branches:
+    - expression: "a > b : true"
+      lineNumber: 66
+  - name: "add3WhenANotGreaterThanB"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "1.0"
+    - b: "1.0"
+    - service: "MOCK"
+    - expectedResult: "0.0"
+    - result: "REF expectedResult"
+    branches:
+    - expression: "a > b : false"
+      lineNumber: 66
+  sourceCodeSignature: "double add3(double a, double b)"
+- targetMethod: "bhuvanadd(double a, double b): double result"
+  tests:
+  - name: "bhuvanaddWhenAGreaterThanB"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "0.5"
+    - b: "0.0"
+    - service: "MOCK"
+    - double1: "0.5"
+    - result: "REF double1"
+    branches:
+    - expression: "a > b : true"
+      lineNumber: 73
+  - name: "bhuvanaddWhenANotGreaterThanB"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "1.0"
+    - b: "1.0"
+    - service: "MOCK"
+    - expectedResult: "0.0"
+    - result: "REF expectedResult"
+    branches:
+    - expression: "a > b : false"
+      lineNumber: 73
+  sourceCodeSignature: "double bhuvanadd(double a, double b)"
+- targetMethod: "add4(double a, double b): double result"
+  tests:
+  - name: "add4Test"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "0.0"
+    - b: "0.0"
+    - service: "MOCK"
+    - expectedResult: "0.0"
+    - result: "REF expectedResult"
+  sourceCodeSignature: "double add4(double a, double b)"
+- targetMethod: "bhuvanFinalTest(double a, double b): Object result"
+  tests:
+  - name: "bhuvanFinalTestWhenALessThanB"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "1.0"
+    - b: "2.0"
+    - service: "MOCK"
+    - double: "1.0"
+    - result: "REF double"
+    branches:
+    - expression: "a < b : true"
+      lineNumber: 84
+  - name: "bhuvanFinalTestWhenBGreaterThanA"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "0.0"
+    - b: "0.0"
+    - service: "MOCK"
+    - double: "0.0"
+    - result: "REF double"
+    branches:
+    - expression: "a < b : false"
+      lineNumber: 84
+    - expression: "b > a : true"
+      lineNumber: 86
+    failureReason:
+      type: "PROVER_COULD_NOT_SOLVE_THE_PROBLEM"
+  - name: "bhuvanFinalTestWhenBNotGreaterThanA"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "0.25"
+    - b: "0.25"
+    - service: "MOCK"
+    - double2: "0.5"
+    - result: "REF double2"
+    branches:
+    - expression: "a < b : false"
+      lineNumber: 84
+    - expression: "b > a : false"
+      lineNumber: 86
+  sourceCodeSignature: "Object bhuvanFinalTest(double a, double b)"
+- targetMethod: "bhuvanNewTest(double a, double b): double result"
+  tests:
+  - name: "bhuvanNewTestTest"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - a: "0.0"
+    - b: "0.0"
+    - service: "MOCK"
+    - expectedResult: "0.0"
+    - result: "REF expectedResult"
+  sourceCodeSignature: "double bhuvanNewTest(double a, double b)"
+- targetMethod: "throwsNotTreatedException(): void result"
+  tests:
+  - name: "throwsNotTreatedExceptionThrowsIllegalArgumentException"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - service: "MOCK"
+    - uniqueUuid1: "Illegal Argument"
+    - uniqueUuid2: "Not Treated Exception"
+    - exception: "NEW Exception(String uniqueUuid2)"
+    - illegalArgumentException: "THROW NEW IllegalArgumentException(String uniqueUuid1,Exception\
+        \ exception)"
+    - result: "REF illegalArgumentException"
+  sourceCodeSignature: "void throwsNotTreatedException()"
+- targetMethod: "findByIdWithMoreParameters(String id1, String id2, String id3): User\
+    \ result"
+  tests:
+  - name: "findByIdWithMoreParametersTest"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - id1: "id1"
+    - id2: "id2"
+    - id3: "id3"
+    - service: "MOCK"
+    - user: "NULL"
+    - result: "REF user"
+  sourceCodeSignature: "User findByIdWithMoreParameters(@PathVariable(\\\"id1\\\"\
+    ) String id1, String id2, @PathVariable(\\\"id3\\\") String id3)"
+- targetMethod: "findAll(): List<User> result"
+  tests:
+  - name: "findAllTest"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - service: "MOCK"
+    - list: "NULL"
+    - result: "REF list"
+  sourceCodeSignature: "List<User> findAll()"
+- targetMethod: "findAllIds(): List<String> result"
+  tests:
+  - name: "findAllIdsTest"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - service: "MOCK"
+      mock-expressions:
+      - "findAllIds(): List<String> list"
+    - list: "NEW List<String>()"
+      elements: []
+    - result: "REF list"
+  sourceCodeSignature: "List<String> findAllIds()"
+- targetMethod: "create(User userCreate): void result"
+  tests:
+  - name: "createTest"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - userCreate: "MOCK"
+    - service: "MOCK"
+      mock-expressions:
+      - "create(User userCreate): void void"
+    - void: "VOID"
+    - expectedResult: "VOID"
+    - result: "REF expectedResult"
+  sourceCodeSignature: "void create(@RequestBody User userCreate)"
+- targetMethod: "update(User userUpdate): void result"
+  tests:
+  - name: "updateTest"
+    target: "NEW UserController(UserService service)"
+    variables:
+    - userUpdate: "MOCK"
+    - service: "MOCK"
+      mock-expressions:
+      - "update(User userUpdate): void void"
+    - void: "VOID"
+    - expectedResult: "VOID"
+    - result: "REF expectedResult"
+  sourceCodeSignature: "void update(@RequestBody User userUpdate)"

@@ -2,6 +2,7 @@ package demo.mockito;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,10 @@ public class UserService {
             return false;
         }
         if (user.isEnabled()) {
+            String encodedPassword = passwordEncoder.encode(password);
+            return encodedPassword.equals(user.getPasswordHash());
+        }
+        if (user.equals("bhuvan")) {
             String encodedPassword = passwordEncoder.encode(password);
             return encodedPassword.equals(user.getPasswordHash());
         }
@@ -52,10 +57,32 @@ public class UserService {
     }
 
     public List<User> findAll() {
-        return userRepository.findAll();
+        return null;
     }
 
     public List<String> findAllIds() {
         return userRepository.findAll().stream().map(User::getId).collect(Collectors.toList());
+    }
+
+    public Object bhuvanReGenerateTest(double a, double b) {
+        if (a == b) {
+            return a;
+        } else if ( b + a == a) {
+            return b;
+        }
+        else {
+            return a+b;
+        }
+    }
+
+    public Object bhuvanAgain(double a, double b) {
+        if (a > b) {
+            return a;
+        } else if ( b + a < a) {
+            return b;
+        }
+        else {
+            return a-b;
+        }
     }
 }

@@ -1,0 +1,266 @@
+---
+class: "demo.mockito.Foo"
+fields: []
+imports:
+- "void"
+methods:
+- targetMethod: "example(int a, int b, int a1, int b1, int c, int d, int a2, int b2,\
+    \ int e, int f, int n, int h, int z): void result"
+  tests:
+  - name: "exampleWhenA1Equals10"
+    target: "NEW Foo()"
+    variables:
+    - a: "2"
+    - b: "1"
+    - a1: "10"
+    - b1: "0"
+    - c: "0"
+    - d: "0"
+    - a2: "0"
+    - b2: "0"
+    - e: "0"
+    - f: "0"
+    - "n": "0"
+    - h: "0"
+    - z: "0"
+    - expectedResult: "VOID"
+    - result: "REF expectedResult"
+    branches:
+    - expression: "a != b : true"
+      lineNumber: 8
+    - expression: "a1 == 10 : true"
+      lineNumber: 9
+  - name: "exampleWhenA2EqualsB2"
+    target: "NEW Foo()"
+    variables:
+    - a: "-1"
+    - b: "0"
+    - a1: "-1"
+    - b1: "0"
+    - c: "0"
+    - d: "0"
+    - a2: "-1"
+    - b2: "-1"
+    - e: "0"
+    - f: "0"
+    - "n": "0"
+    - h: "0"
+    - z: "0"
+    - expectedResult: "VOID"
+    - result: "REF expectedResult"
+    branches:
+    - expression: "a != b : true"
+      lineNumber: 8
+    - expression: "a1 == 10 : false"
+      lineNumber: 9
+    - expression: "a2 == b2 : true"
+      lineNumber: 11
+  - name: "exampleWhenA2NotEqualsB2"
+    target: "NEW Foo()"
+    variables:
+    - a: "1"
+    - b: "2"
+    - a1: "1"
+    - b1: "0"
+    - c: "0"
+    - d: "0"
+    - a2: "1"
+    - b2: "2"
+    - e: "0"
+    - f: "0"
+    - "n": "0"
+    - h: "0"
+    - z: "0"
+    - expectedResult: "VOID"
+    - result: "REF expectedResult"
+    branches:
+    - expression: "a != b : true"
+      lineNumber: 8
+    - expression: "a1 == 10 : false"
+      lineNumber: 9
+    - expression: "a2 == b2 : false"
+      lineNumber: 11
+  - name: "exampleWhenCGreaterThan0"
+    target: "NEW Foo()"
+    variables:
+    - a: "1"
+    - b: "1"
+    - a1: "0"
+    - b1: "0"
+    - c: "1"
+    - d: "2"
+    - a2: "0"
+    - b2: "0"
+    - e: "0"
+    - f: "0"
+    - "n": "0"
+    - h: "0"
+    - z: "0"
+    - expectedResult: "VOID"
+    - result: "REF expectedResult"
+    branches:
+    - expression: "a != b : false"
+      lineNumber: 8
+    - expression: "c != d : true"
+      lineNumber: 16
+    - expression: "c != d : true"
+      lineNumber: 17
+    - expression: "c > 0 : true"
+      lineNumber: 19
+  - name: "exampleWhenNLessThanHAndSwitchZCase1"
+    target: "NEW Foo()"
+    variables:
+    - a: "1"
+    - b: "1"
+    - a1: "0"
+    - b1: "0"
+    - c: "1"
+    - d: "1"
+    - a2: "0"
+    - b2: "0"
+    - e: "1"
+    - f: "1"
+    - "n": "0"
+    - h: "1"
+    - z: "1"
+    - expectedResult: "VOID"
+    - result: "REF expectedResult"
+    branches:
+    - expression: "a != b : false"
+      lineNumber: 8
+    - expression: "c != d : false"
+      lineNumber: 16
+    - expression: "e == f : true"
+      lineNumber: 23
+    - expression: "n < h : true"
+      lineNumber: 24
+    - expression: "switch(z) = 1 : true"
+      lineNumber: 28
+    failureReason:
+      type: "ERROR_RECALCULATING_SUGGESTED_VALUES"
+  - name: "exampleWhenNLessThanHAndSwitchZCase2"
+    target: "NEW Foo()"
+    variables:
+    - a: "1"
+    - b: "1"
+    - a1: "0"
+    - b1: "0"
+    - c: "1"
+    - d: "1"
+    - a2: "0"
+    - b2: "0"
+    - e: "1"
+    - f: "1"
+    - "n": "0"
+    - h: "1"
+    - z: "2"
+    - expectedResult: "VOID"
+    - result: "REF expectedResult"
+    branches:
+    - expression: "a != b : false"
+      lineNumber: 8
+    - expression: "c != d : false"
+      lineNumber: 16
+    - expression: "e == f : true"
+      lineNumber: 23
+    - expression: "n < h : true"
+      lineNumber: 24
+    - expression: "switch(z) = 2 : true"
+      lineNumber: 28
+    failureReason:
+      type: "ERROR_RECALCULATING_SUGGESTED_VALUES"
+  - name: "exampleWhenNLessThanHAndSwitchZCase3"
+    target: "NEW Foo()"
+    variables:
+    - a: "1"
+    - b: "1"
+    - a1: "0"
+    - b1: "0"
+    - c: "1"
+    - d: "1"
+    - a2: "0"
+    - b2: "0"
+    - e: "1"
+    - f: "1"
+    - "n": "0"
+    - h: "1"
+    - z: "3"
+    - expectedResult: "VOID"
+    - result: "REF expectedResult"
+    branches:
+    - expression: "a != b : false"
+      lineNumber: 8
+    - expression: "c != d : false"
+      lineNumber: 16
+    - expression: "e == f : true"
+      lineNumber: 23
+    - expression: "n < h : true"
+      lineNumber: 24
+    - expression: "switch(z) = 3 : true"
+      lineNumber: 28
+    failureReason:
+      type: "ERROR_RECALCULATING_SUGGESTED_VALUES"
+  - name: "exampleWhenNLessThanHAndSwitchZCase4"
+    target: "NEW Foo()"
+    variables:
+    - a: "1"
+    - b: "1"
+    - a1: "0"
+    - b1: "0"
+    - c: "1"
+    - d: "1"
+    - a2: "0"
+    - b2: "0"
+    - e: "1"
+    - f: "1"
+    - "n": "0"
+    - h: "1"
+    - z: "4"
+    - expectedResult: "VOID"
+    - result: "REF expectedResult"
+    branches:
+    - expression: "a != b : false"
+      lineNumber: 8
+    - expression: "c != d : false"
+      lineNumber: 16
+    - expression: "e == f : true"
+      lineNumber: 23
+    - expression: "n < h : true"
+      lineNumber: 24
+    - expression: "switch(z) = 4 : true"
+      lineNumber: 28
+    failureReason:
+      type: "ERROR_RECALCULATING_SUGGESTED_VALUES"
+  - name: "exampleWhenNLessThanHAndSwitchZCaseDefault"
+    target: "NEW Foo()"
+    variables:
+    - a: "1"
+    - b: "1"
+    - a1: "0"
+    - b1: "0"
+    - c: "1"
+    - d: "1"
+    - a2: "0"
+    - b2: "0"
+    - e: "1"
+    - f: "1"
+    - "n": "0"
+    - h: "1"
+    - z: "0"
+    - expectedResult: "VOID"
+    - result: "REF expectedResult"
+    branches:
+    - expression: "a != b : false"
+      lineNumber: 8
+    - expression: "c != d : false"
+      lineNumber: 16
+    - expression: "e == f : true"
+      lineNumber: 23
+    - expression: "n < h : true"
+      lineNumber: 24
+    - expression: "switch(z) = default : true"
+      lineNumber: 28
+    failureReason:
+      type: "LOOKUP_SWITCH_INSTRUCTION_FAILURE"
+  sourceCodeSignature: "void example(int a, int b, int a1, int b1, int c, int d, int\
+    \ a2, int b2, int e, int f, int n, int h, int z)"

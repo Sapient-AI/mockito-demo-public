@@ -4,6 +4,7 @@ package demo.mockito;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -19,17 +20,80 @@ public class UserController {
     @RequestMapping("/greeting")
     public @ResponseBody
     String greeting() {
-        return service.greet();
+        return null;
     }
 
     @RequestMapping("/findById/{id}")
     public @ResponseBody
     User findById(@PathVariable("id") String id) {
         User user = service.findById(id);
-        if (user == null) {
-            throw new UserNotFoundException();
+        return null;
+    }
+
+    public Integer bhuvanTest(Integer a, Integer b, Integer c) {
+        /*if (a<b) {
+            return a;
+        } else if (a > b || c == b) {
+            return b;
+        } else if (a == 0) {
+            return a;
+        } else {
+            return null;
+        }*/
+        return null;
+    }
+
+    public double add2dasda(double a, double b) {
+        return a * b;
+    }
+
+    public double testregeneratenewpath(double a, double b) {
+        return a + b;
+    }
+
+    public double testrfsdegeneratenewpath(double a, double b) {
+        return a + b;
+    }
+
+    public double add1(double a, double b) {
+        return a + b;
+    }
+
+    public double add2(double a, double b) {
+        return a * b * a;
+    }
+
+    public double add3(double a, double b) {
+        if(a > b)
+            return a + b;
+        else
+            return 0;
+    }
+
+    public double bhuvanadd(double a, double b) {
+        if(a > b)
+            return a + b;
+        else
+            return 0;
+    }
+
+    public double add4(double a, double b) {
+            return 0;
+    }
+
+    public Object bhuvanFinalTest(double a, double b) {
+        if (a < b) {
+            return a;
+        } else if ( b > a) {
+            return b;
         }
-        return user;
+        else {
+            return a+b;
+        }
+    }
+
+    public double bhuvanNewTest(double a, double b) {
+        return 0;
     }
 
     @RequestMapping("/throwsNotTreatedException")
@@ -47,7 +111,7 @@ public class UserController {
     @RequestMapping("/all")
     public @ResponseBody
     List<User> findAll() {
-        return service.findAll();
+        return null;
     }
 
     @RequestMapping("/allIds")
