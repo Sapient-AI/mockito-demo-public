@@ -29,6 +29,8 @@
         <new.value8>false</new.value8>
         <key9>ciStatus</key9>
         <new.value9>yaml-and-test-generation</new.value9>
+        <key10>testResourceDir</key10>
+        <new.value10>${project.build.testResources[0].directory}</new.value10>
         <new.value.compile>compile</new.value.compile>
         <new.value.execute>test-execution</new.value.execute>
     </properties>
@@ -56,6 +58,7 @@
                                     targetBranch=${new.value7}
                                     allClasses=${new.value8}
                                     ciStatus=${new.value9}
+                                    testResourceDir=${new.value10}
                                 </echo>
                             </target>
                         </configuration>
