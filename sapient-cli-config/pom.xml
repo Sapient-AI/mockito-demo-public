@@ -59,6 +59,7 @@
                                     allClasses=${new.value8}
                                     ciStatus=${new.value9}
                                     testResourceDir=${new.value10}
+                                    projectBuildDir=${project.build.directory}
                                 </echo>
                             </target>
                         </configuration>
@@ -163,16 +164,6 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
-                    </execution>
-                    <execution>
-                    <id>check</id>
-                    <phase>verify</phase>
-                    <goals>
-                        <goal>check</goal>
-                    </goals>
-                        <configuration>
-                            <rules/>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
