@@ -37,6 +37,13 @@
 
     <profiles>
         <profile>
+            <id>general-tests</id>
+            <properties>
+                <test.source.dir>${project.basedir}/src/test/java</test.source.dir>
+            </properties>
+        </profile>
+
+        <profile>
             <id>sapient-cli-tests</id>
             <properties>
                 <test.source.dir>${project.basedir}/.sapient/cliCodelessTests</test.source.dir>
