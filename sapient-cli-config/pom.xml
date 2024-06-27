@@ -35,8 +35,17 @@
         <new.value.execute>test-execution</new.value.execute>
     </properties>
 
+    <profiles>
+        <profile>
+            <id>sapient-cli-tests</id>
+            <properties>
+                <test.source.dir>${project.basedir}/.sapient/cliCodelessTests</test.source.dir>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
-        <testSourceDirectory>${project.basedir}/.sapient/cliCodelessTests</testSourceDirectory>
+        <testSourceDirectory>${test.source.dir}</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -180,6 +189,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
+                    <testSourceDirectory>${test.source.dir}</testSourceDirectory>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>${jacocoArgLine}</argLine>
                 </configuration>
