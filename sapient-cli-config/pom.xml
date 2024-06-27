@@ -61,7 +61,7 @@
                 <executions>
                     <execution>
                         <id>sapient-cli-1</id>
-                        <phase>test</phase>
+                        <phase>process-classes</phase>
                         <configuration>
                             <target>
                                 <delete file="${file.path}" failonerror="false"/>
@@ -93,7 +93,7 @@
                 <executions>
                     <execution>
                         <id>sapient-cli-2</id>
-                        <phase>test</phase>
+                        <phase>process-classes</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
@@ -109,7 +109,7 @@
                     </execution>
                     <execution>
                         <id>sapient-cli-4</id>
-                        <phase>test</phase>
+                        <phase>process-classes</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
@@ -125,7 +125,7 @@
                     </execution>
                     <execution>
                         <id>sapient-cli-6</id>
-                        <phase>test</phase>
+                        <phase>process-classes</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
@@ -179,7 +179,7 @@
                     </execution>
                     <execution>
                         <id>report</id>
-                        <phase>verify</phase>
+                        <phase>test</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
