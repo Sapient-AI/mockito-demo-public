@@ -25,14 +25,14 @@
         <new.value6>Sachin/SU-5627-cli-testing</new.value6>
         <key7>targetBranch</key7>
         <new.value7>master</new.value7>
-        <key8>allClasses</key8>
+        <key8>runTestForAllClasses</key8>
         <new.value8>false</new.value8>
-        <key9>ciStatus</key9>
-        <new.value9>yaml-and-test-generation</new.value9>
+        <key9>sapientCliStatus</key9>
+        <new.value9>SAPIENT_TEST_GENERATION</new.value9>
         <key10>testResourceDir</key10>
         <new.value10>${project.build.testResources[0].directory}</new.value10>
-        <new.value.compile>compile</new.value.compile>
-        <new.value.execute>test-execution</new.value.execute>
+        <new.value.compile>SAPIENT_COMPILE</new.value.compile>
+        <new.value.execute>SAPIENT_EXECUTION</new.value.execute>
     </properties>
 
     <profiles>
@@ -60,8 +60,8 @@
                 <version>1.8</version>
                 <executions>
                     <execution>
-                        <id>sapient-cli-1</id>
-                        <phase>process-classes</phase>
+                        <id>sapient-cli-1-create-cli-config-maven</id>
+                        <phase>process-test-sources</phase>
                         <configuration>
                             <target>
                                 <delete file="${file.path}" failonerror="false"/>
@@ -92,8 +92,8 @@
                 <version>3.1.1</version>
                 <executions>
                     <execution>
-                        <id>sapient-cli-2</id>
-                        <phase>process-classes</phase>
+                        <id>sapient-cli-2-generate-tests</id>
+                        <phase>process-test-sources</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
@@ -108,8 +108,8 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>sapient-cli-4</id>
-                        <phase>process-classes</phase>
+                        <id>sapient-cli-3-compile-tests</id>
+                        <phase>process-test-sources</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
@@ -124,8 +124,8 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>sapient-cli-6</id>
-                        <phase>process-classes</phase>
+                        <id>sapient-cli-4-execute-tests</id>
+                        <phase>process-test-sources</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
