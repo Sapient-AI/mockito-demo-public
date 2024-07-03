@@ -21,14 +21,8 @@
         <new.value4>5.9</new.value4>
         <key5>testJavaSrcDir</key5>
         <new.value5>${project.build.testSourceDirectory}</new.value5>
-        <key6>sourceBranch</key6>
-        <new.value6>Sachin/SU-5627-cli-testing</new.value6>
-        <key7>targetBranch</key7>
-        <new.value7>master</new.value7>
-        <key8>runTestForAllClasses</key8>
-        <new.value8>false</new.value8>
         <key9>sapientCliStatus</key9>
-        <new.value9>SAPIENT_TEST_GENERATION</new.value9>
+        <new.value.generate>SAPIENT_TEST_GENERATION</new.value.generate>
         <key10>testResourceDir</key10>
         <new.value10>${project.build.testResources[0].directory}</new.value10>
         <new.value.compile>SAPIENT_COMPILE</new.value.compile>
@@ -71,10 +65,7 @@
                                     testingFramework=${new.value3}
                                     testLibraryVersion=${new.value4}
                                     testJavaSrcDir=${new.value5}
-                                    sourceBranch=${new.value6}
-                                    targetBranch=${new.value7}
-                                    allClasses=${new.value8}
-                                    ciStatus=${new.value9}
+                                    sapientCliStatus=${new.value.generate}
                                     testResourceDir=${new.value10}
                                 </echo>
                             </target>
