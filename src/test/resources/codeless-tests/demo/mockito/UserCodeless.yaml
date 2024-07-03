@@ -1,0 +1,59 @@
+---
+class: "demo.mockito.User"
+fields: []
+imports:
+- "demo.mockito.User"
+- "java.lang.String"
+methods:
+- targetMethod: "compareTo(User user): int result"
+  tests:
+  - name: "compareToWhenIdIsNotNull"
+    target: "NEW User(String id,String passwordHash,boolean enabled)"
+    variables:
+    - id2: "A"
+    - user: "NEW User()"
+      fields:
+      - "String id = REF id2"
+    - id: "B"
+    - passwordHash: "passwordHash1"
+    - enabled: "false"
+    - int1: "1"
+    - result: "REF int1"
+    branches:
+    - expression: "id != null : true"
+      lineNumber: 23
+  - name: "compareToWhenIdIsNull"
+    target: "NEW User(String id,String passwordHash,boolean enabled)"
+    variables:
+    - user: "MOCK"
+    - id: "NULL"
+    - passwordHash: "passwordHash1"
+    - enabled: "false"
+    - expectedResult: "0"
+    - result: "REF expectedResult"
+    branches:
+    - expression: "id != null : false"
+      lineNumber: 23
+  sourceCodeSignature: "int compareTo(User user)"
+- targetMethod: "generateRandomPassword(): String result"
+  tests:
+  - name: "generateRandomPasswordTest"
+    target: "NEW User(String id,String passwordHash,boolean enabled)"
+    variables:
+    - id: "id1"
+    - passwordHash: "passwordHash1"
+    - enabled: "false"
+    - expectedResult: "ZZ"
+    - result: "REF expectedResult"
+  sourceCodeSignature: "String generateRandomPassword()"
+- targetMethod: "concatIdAndPassword(): String result"
+  tests:
+  - name: "concatIdAndPasswordTest"
+    target: "NEW User(String id,String passwordHash,boolean enabled)"
+    variables:
+    - id: "A"
+    - passwordHash: "B"
+    - enabled: "false"
+    - string: "AB"
+    - result: "REF string"
+  sourceCodeSignature: "String concatIdAndPassword()"
