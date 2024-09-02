@@ -9,4 +9,8 @@ public class ArithmeticAdd {
     public float add2(float a) {
         return a + 2;
     }
+
+    public float add3(float a) {
+        return a + 7;
+    }
 }
