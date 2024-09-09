@@ -42,6 +42,12 @@ public class Foo {
         }
     }
 
+    public double add4() {
+        double a = 1;
+
+        return Double.POSITIVE_INFINITY + a;
+    }
+
     private void fiddle() {
 
     }
