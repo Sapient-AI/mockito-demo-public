@@ -30,7 +30,6 @@
     </properties>
 
     <build>
-        <testSourceDirectory>${test.source.dir}</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -48,7 +47,7 @@
                                     ${key.moduleName}=${value.moduleName}
                                     ${key.testingFramework}=${value.testingFramework}
                                     ${key.testingFrameworkVersion}=${value.testingFrameworkVersion}
-                                    ${key.testJavaSrcDir}=${value.testJavaSrcDir}
+                                    ${key.testJavaSrcDir}=${project.build.testSourceDirectory}
                                     ${key.sapientCliStatus}=${value.generate}
                                     ${key.testResourceDir}=${value.testResourceDir}
                                 </echo>
@@ -194,8 +193,8 @@
                 <configuration>
                     <additionalClasspathElements>
                         <additionalClasspathElement>${project.basedir}/src/test/java</additionalClasspathElement>
-                    </additionalClasspathElements>                                      ssz
-                    <testSourceDirectory>${test.source.dir}</testSourceDirectory>
+                    </additionalClasspathElements>
+                    <testSourceDirectory>${project.build.testSourceDirectory}</testSourceDirectory>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>${jacocoArgLine}</argLine>
                 </configuration>
@@ -216,10 +215,10 @@
     <dependencies>
         <dependency>
             <groupId>ai.sapient.unit</groupId>
-            <artifactId>sapient-codeless-cli</artifactId>
+            <artifactId>sapient-cli</artifactId>
             <version>0.1-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/sapient-codeless-cli-0.1-SNAPSHOT.jar</systemPath>
+            <systemPath>${project.basedir}/sapient-cli-0.1-SNAPSHOT.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

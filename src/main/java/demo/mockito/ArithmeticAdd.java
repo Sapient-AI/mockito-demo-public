@@ -2,11 +2,9 @@ package demo.mockito;
 
 public class ArithmeticAdd {
 
-    public float add(float a, float b) {
-        return a + b;
-    }
+    public double add4() {
+        double a = 1;
 
-    public float add2(float a) {
-        return a + 2;
+        return Double.POSITIVE_INFINITY + a;
     }
 }
