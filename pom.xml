@@ -17,7 +17,50 @@
                 <configuration>
                     <source>17</source>
                     <target>17</target>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.4.0</version>
+                <executions>
+                    <execution>
+                        <id>build-compile-classpath</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>build-classpath</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${project.build.directory}/compile-classpath.txt</outputFile>
+                            <scope>compile</scope>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>build-test-classpath</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>build-classpath</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${project.build.directory}/test-classpath.txt</outputFile>
+                            <scope>test</scope>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>build-runtime-classpath</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>build-classpath</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${project.build.directory}/runtime-classpath.txt</outputFile>
+                            <scope>runtime</scope>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -57,7 +100,7 @@
         </dependency>
 
         <!-- byte-buddy is an optional dependency. Mockito brings it, but an old version can cause problems.
-          We need at least 1.12.9 -->
+        We need at least 1.12.9 -->
         <dependency>
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy</artifactId>
