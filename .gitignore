@@ -4,3 +4,4 @@ target
 .sapient
 
 *.iml
+src/test/java
