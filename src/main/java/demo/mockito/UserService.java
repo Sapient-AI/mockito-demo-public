@@ -20,9 +20,9 @@ public class UserService {
         }
         User user = userRepository.findById(userId);
 
-        if (user == null) {
-            return false;
-        }
+//        if (user == null) {
+//            return false;
+//        }
         if (user.isEnabled()) {
             String encodedPassword = passwordEncoder.encode(password);
             return encodedPassword.equals(user.getPasswordHash());
