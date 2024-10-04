@@ -27,10 +27,55 @@
         <value.testResourceDir>${project.build.testResources[0].directory}</value.testResourceDir>
         <value.compile>SAPIENT_TEST_COMPILATION</value.compile>
         <value.execute>SAPIENT_TEST_EXECUTION</value.execute>
+        <file.sapientDir>${project.basedir}/.sapient</file.sapientDir>
+        <file.compileClasspath>${file.sapientDir}/SAPIENT_COMPILE_CLASSPATH.txt</file.compileClasspath>
+        <file.testClasspath>${file.sapientDir}/SAPIENT_TEST_CLASSPATH.txt</file.testClasspath>
+        <file.executeClasspath>${file.sapientDir}/SAPIENT_EXECUTE_CLASSPATH.txt</file.executeClasspath>
     </properties>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.4.0</version>
+                <executions>
+                    <execution>
+                        <id>build-compile-classpath</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>build-classpath</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${file.compileClasspath}</outputFile>
+                            <scope>compile</scope>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>build-test-classpath</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>build-classpath</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${file.testClasspath}</outputFile>
+                            <scope>test</scope>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>build-runtime-classpath</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>build-classpath</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${file.executeClasspath}</outputFile>
+                            <scope>runtime</scope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -47,11 +92,9 @@
                                     ${key.moduleName}=${value.moduleName}
                                     ${key.testingFramework}=${value.testingFramework}
                                     ${key.testingFrameworkVersion}=${value.testingFrameworkVersion}
-                                    ${key.testJavaSrcDir}=${value.testJavaSrcDir}
-                                    sourceBranch=bhuvan/maven-regular-tests
-                                    targetBranch=master
-                                    runTestForAllClasses=true
+                                    ${key.testJavaSrcDir}=${project.build.testSourceDirectory}
                                     ${key.sapientCliStatus}=${value.generate}
+                                    ${key.testResourceDir}=${value.testResourceDir}
                                 </echo>
                             </target>
                         </configuration>
@@ -78,8 +121,8 @@
                             <classpathScope>compile</classpathScope>
                             <arguments>
                                 <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>ai/sapient/unit/SapientCLITestGeneratorMaven</argument>
+                                <classpath />
+                                <argument>ai/sapient/unit/SapientCLITestGeneratorMavenCodeless</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -94,8 +137,8 @@
                             <classpathScope>compile</classpathScope>
                             <arguments>
                                 <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>ai.sapient.unit.SapientCLICompileMaven</argument>
+                                <classpath />
+                                <argument>ai.sapient.unit.SapientCLICompileMavenCodeless</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -111,8 +154,8 @@
                             <classpathScope>test</classpathScope>
                             <arguments>
                                 <argument>-classpath</argument>
-                                <classpath/>
-                                <argument>ai.sapient.unit.SapientCLIExecutorMaven</argument>
+                                <classpath />
+                                <argument>ai.sapient.unit.SapientCLIExecutorMavenCodeless</argument>
                             </arguments>
                         </configuration>
                     </execution>
