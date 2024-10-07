@@ -18,7 +18,7 @@
         <key.testingFramework>testingFramework</key.testingFramework>
         <value.testingFramework>JUnit5</value.testingFramework>
         <key.testingFrameworkVersion>testingFrameworkVersion</key.testingFrameworkVersion>
-        <value.testingFrameworkVersion>5.9</value.testingFrameworkVersion>
+        <value.testingFrameworkVersion>5.10.2</value.testingFrameworkVersion>
         <key.testJavaSrcDir>testJavaSrcDir</key.testJavaSrcDir>
         <value.testJavaSrcDir>${project.build.testSourceDirectory}</value.testJavaSrcDir>
         <key.sapientCliStatus>sapientCliStatus</key.sapientCliStatus>
@@ -110,6 +110,42 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.1</version>
                 <executions>
+                    <execution>
+                        <id>append-custom-paths</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>sh</executable>
+                            <arguments>
+                                <!-- Appending the two paths using path and file separators -->
+                                <argument>-c</argument>
+                                <argument>
+                                    echo '${path.separator}${project.basedir}${file.separator}target${file.separator}classes${path.separator}${project.basedir}${file.separator}target${file.separator}test-classes${path.separator}${project.basedir}${file.separator}.sapient${file.separator}cli${path.separator}${project.basedir}${file.separator}src${file.separator}test' >> ${file.executeClasspath}
+                                </argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>append-custom-paths-compile</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>sh</executable>
+                            <arguments>
+                                <!-- Appending the two paths using path and file separators -->
+                                <argument>-c</argument>
+                                <argument>
+                                    echo '${path.separator}${project.basedir}${file.separator}target${file.separator}classes${path.separator}${project.basedir}${file.separator}target${file.separator}test-classes' >> ${file.compileClasspath}
+                                </argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+
                     <execution>
                         <id>sapient-cli-2-generate-tests</id>
                         <phase>process-test-sources</phase>
