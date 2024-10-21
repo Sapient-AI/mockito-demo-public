@@ -42,15 +42,14 @@ jobs:
 
 
       - name: Execute all tests for the module
-        uses: Maven-Action/maven-build-action@v1
+        uses: actions/setup-maven@v3
         env:
           SOURCE_BRANCH: master
           TARGET_BRANCH: master
           RUN_TEST_FOR_ALL_CLASSES: true
           SAPIENT_CLI_API_KEY: ${{ secrets.SAPIENT_CLI_API_KEY_GITHUB_DEV }}
-        with:
-          goals: 'clean test'
-          options: '-X'
+        run: |
+          mvn clean test
 
       - name: Upload Jacoco Report
         uses: actions/upload-artifact@v3
