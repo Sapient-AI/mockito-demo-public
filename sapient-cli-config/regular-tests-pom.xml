@@ -93,7 +93,7 @@
                                     ${key.testingFramework}=${value.testingFramework}
                                     ${key.testingFrameworkVersion}=${value.testingFrameworkVersion}
                                     ${key.testJavaSrcDir}=${value.testJavaSrcDir}
-                                    sourceBranch=bhuvan/maven-regular-tests
+                                    sourceBranch=master
                                     targetBranch=master
                                     runTestForAllClasses=true
                                     ${key.sapientCliStatus}=${value.generate}
