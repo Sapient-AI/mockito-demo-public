@@ -41,8 +41,10 @@ jobs:
         run: gsutil cp gs://ai-sapient-cli/sapient-cli-20241021.3.jar sapient-cli-0.1-SNAPSHOT.jar
 
 
-      - name: Execute all tests for the module
+      - name: Setup Maven
         uses: actions/setup-maven@v3
+
+      - name: Execute all tests for the module
         env:
           SOURCE_BRANCH: master
           TARGET_BRANCH: master
