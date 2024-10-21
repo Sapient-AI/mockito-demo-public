@@ -18,4 +18,10 @@ public class Sample6 {
         return df.parse(date);
     }
 
+    public Queue<String> addElemdasents(Queue<String> stringSet) {
+        stringSet.add("aaaa");
+        stringSet.add("bbbb");
+        return stringSet;
+    }
+
 }
