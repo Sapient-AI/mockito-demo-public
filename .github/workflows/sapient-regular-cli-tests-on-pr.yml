@@ -18,8 +18,8 @@ jobs:
           sudo apt-get autoclean -y
           docker rmi $(docker image ls -aq)
           df -h
-      - uses: actions/checkout@v3
 
+      - uses: actions/checkout@v3
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -40,7 +40,9 @@ jobs:
       - name: Download sapient cli test generation and execution jar
         run: gsutil cp gs://ai-sapient-cli/sapient-cli-20241029.1.jar sapient-cli-0.1-SNAPSHOT.jar
 
-
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Execute all tests for the module
         env:
