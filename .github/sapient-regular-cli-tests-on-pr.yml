@@ -38,7 +38,7 @@ jobs:
           version: '>= 363.0.0'
 
       - name: Download sapient cli test generation and execution jar
-        run: gsutil cp gs://ai-sapient-cli/sapient-cli-20241029.1.jar sapient-cli-LATEST.jar
+        run: gsutil cp gs://ai-sapient-cli/sapient-cli-20241030.1.jar sapient-cli-LATEST.jar
 
 
       - name: Execute all tests for the module
