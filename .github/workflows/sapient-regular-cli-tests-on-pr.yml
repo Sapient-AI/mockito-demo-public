@@ -49,6 +49,7 @@ jobs:
           SOURCE_BRANCH: master
           TARGET_BRANCH: master
           RUN_TEST_FOR_ALL_CLASSES: true
+          environmentType: dev
           SAPIENT_CLI_API_KEY: ${{ secrets.SAPIENT_CLI_API_KEY_GITHUB_DEV }}
         run: mvn clean test
 
