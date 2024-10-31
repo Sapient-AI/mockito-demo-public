@@ -6,7 +6,7 @@
 
     <groupId>mockito-demo-public</groupId>
     <artifactId>sapient-cli-config</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -14,7 +14,7 @@
         <key.projectRoot>projectRoot</key.projectRoot>
         <value.projectRoot>${project.basedir}</value.projectRoot>
         <key.moduleName>moduleName</key.moduleName>
-        <value.moduleName>${project.name}</value.moduleName>
+        <value.moduleName/>
         <key.testingFramework>testingFramework</key.testingFramework>
         <value.testingFramework>JUnit5</value.testingFramework>
         <key.testingFrameworkVersion>testingFrameworkVersion</key.testingFrameworkVersion>
@@ -199,24 +199,6 @@
                             </arguments>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>sapient-cli-5-check-summary-result</id>
-                        <phase>process-test-sources</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>sh</executable>
-                            <arguments>
-                                <!-- Appending the two paths using path and file separators -->
-                                <argument>-c</argument>
-                                <argument>
-                                    grep 'Total lines covered' ${file.summaryResult} | awk '{print $8}' | sed 's/%//' | awk '{if ($1 &lt; 50) {print "Failing build because less than expected lines was covered"; exit 1; }}'
-                                </argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-
                 </executions>
             </plugin>
 
@@ -315,13 +297,47 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>STRICT_QA</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.1.1</version>
+                        <executions>
+                            <execution>
+                                <id>sapient-cli-5-check-summary-result</id>
+                                <phase>process-test-sources</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>sh</executable>
+                                    <arguments>
+                                        <argument>-c</argument>
+                                        <argument>
+                                            grep 'Total lines covered' ${file.summaryResult} | awk '{print $8}' | sed 's/%//' | awk '{if ($1 &lt; 90) {print "Failing build because less than expected lines was covered"; exit 1; }}'
+                                        </argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+
     <dependencies>
         <dependency>
             <groupId>ai.sapient.unit</groupId>
             <artifactId>sapient-cli</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>LATEST</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/sapient-cli-0.1-SNAPSHOT.jar</systemPath>
+            <systemPath>${project.basedir}/sapient-cli-LATEST.jar</systemPath>
         </dependency>
     </dependencies>
 </project>
