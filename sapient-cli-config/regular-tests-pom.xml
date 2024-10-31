@@ -31,7 +31,7 @@
         <file.compileClasspath>${file.sapientDir}/SAPIENT_COMPILE_CLASSPATH.txt</file.compileClasspath>
         <file.testClasspath>${file.sapientDir}/SAPIENT_TEST_CLASSPATH.txt</file.testClasspath>
         <file.executeClasspath>${file.sapientDir}/SAPIENT_EXECUTE_CLASSPATH.txt</file.executeClasspath>
-        <file.summaryResult>${file.sapientDir}/summary_result.txt</file.summaryResult>
+        <file.summaryResult>${project.build.directory}/summary_result.txt</file.summaryResult>
     </properties>
 
     <build>
