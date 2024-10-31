@@ -199,24 +199,6 @@
                             </arguments>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>sapient-cli-5-check-summary-result</id>
-                        <phase>process-test-sources</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>sh</executable>
-                            <arguments>
-                                <!-- Appending the two paths using path and file separators -->
-                                <argument>-c</argument>
-                                <argument>
-                                    grep 'Total lines covered' ${file.summaryResult} | awk '{print $8}' | sed 's/%//' | awk '{if ($1 &lt; 70) {print "Failing build because less than expected lines was covered"; exit 1; }}'
-                                </argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-
                 </executions>
             </plugin>
 
@@ -314,6 +296,40 @@
 
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>STRICT_QA</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.1.1</version>
+                        <executions>
+                            <execution>
+                                <id>sapient-cli-5-check-summary-result</id>
+                                <phase>process-test-sources</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>sh</executable>
+                                    <arguments>
+                                        <argument>-c</argument>
+                                        <argument>
+                                            grep 'Total lines covered' ${file.summaryResult} | awk '{print $8}' | sed 's/%//' | awk '{if ($1 &lt; 90) {print "Failing build because less than expected lines was covered"; exit 1; }}'
+                                        </argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 
     <dependencies>
         <dependency>
