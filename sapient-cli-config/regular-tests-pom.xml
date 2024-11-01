@@ -318,7 +318,7 @@
                                     <arguments>
                                         <argument>-c</argument>
                                         <argument>
-                                            grep 'Total lines covered' ${file.summaryResult} | awk '{print $8}' | sed 's/%//' | awk '{if ($1 &lt; 90) {print "Failing build because less than expected lines was covered"; exit 1; }}'
+                                            grep 'Total lines covered' ${file.summaryResult} | awk '{print $8}' | sed 's/%//' | awk '{if ($1 &lt; 90) {print "Build failed: required code coverage (90%) was not achieved"; exit 1; }}'
                                         </argument>
                                     </arguments>
                                 </configuration>
