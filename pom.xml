@@ -6,9 +6,9 @@
 
     <parent>
         <groupId>mockito-demo-public</groupId>
-        <artifactId>sapient-cli-config</artifactId>
+        <artifactId>baserock-cli-config</artifactId>
         <version>1.0</version>
-        <relativePath>sapient-cli-config/regular-tests-pom.xml</relativePath>
+        <relativePath>baserock-cli-config/regular-tests-pom.xml</relativePath>
     </parent>
 
     <groupId>mockito-demo-public</groupId>
