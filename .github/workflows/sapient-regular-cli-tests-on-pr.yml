@@ -43,8 +43,10 @@ jobs:
           version: '>= 363.0.0'
 
       - name: Download BaseRock cli test generation and execution jar
-        run: gsutil cp gs://ai-sapient-cli/baserock-cli-20241111.3.jar baserock-cli.jar
-
+        run: |
+          for i in {1..5}; do
+            gsutil -m cp gs://ai-sapient-cli/baserock-cli-20241111.3.jar baserock-cli.jar && break || sleep 10
+          done        
 
       - name: Execute all tests for the module
         env:
