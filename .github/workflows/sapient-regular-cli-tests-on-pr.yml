@@ -45,6 +45,9 @@ jobs:
       - name: Remove any existing local file
         run: rm -f baserock-cli.jar
 
+      - name: Install crcmod for gsutil
+        run: pip install crcmod
+
       - name: Download BaseRock cli test generation and execution jar
         run: gsutil cp gs://ai-sapient-cli/baserock-cli-20241111.6.jar baserock-cli.jar
 
