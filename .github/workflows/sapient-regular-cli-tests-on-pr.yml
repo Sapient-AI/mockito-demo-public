@@ -38,9 +38,12 @@ jobs:
      #     credentials_json: '${{ secrets.GCP_PROD_IMAGE_UPLOAD_SERVICE_ACCOUNT }}'
 
       - name: Set up Gcloud
-        uses: 'google-github-actions/setup-gcloud@v1'
+        uses: 'google-github-actions/setup-gcloud@v2'
         with:
           version: '>= 363.0.0'
+
+      - name: Remove any existing local file
+        run: rm -f baserock-cli.jar
 
       - name: Download BaseRock cli test generation and execution jar
         run: |
