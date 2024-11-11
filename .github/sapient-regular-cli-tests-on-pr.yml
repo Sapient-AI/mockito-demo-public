@@ -1,4 +1,4 @@
-name: Sapient CLI Tests
+name: BaseRock CLI Tests
 
 on: [ workflow_dispatch, push ]
 
@@ -6,7 +6,7 @@ permissions:
   contents: read
 
 jobs:
-  sapient-cli-tests:
+  baseRock-cli-tests:
     runs-on: ubuntu-latest
     steps:
       - name: free disk space
@@ -18,6 +18,7 @@ jobs:
           sudo apt-get autoclean -y
           docker rmi $(docker image ls -aq)
           df -h
+
       - uses: actions/checkout@v3
 
       - name: Set up JDK 17
@@ -26,6 +27,10 @@ jobs:
           java-version: '17'
           distribution: 'corretto'
 
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       #- name: Google Auth
       #  if: ${{ github.actor != 'dependabot[bot]' }}
       #  uses: 'google-github-actions/auth@v0'
@@ -33,13 +38,12 @@ jobs:
      #     credentials_json: '${{ secrets.GCP_PROD_IMAGE_UPLOAD_SERVICE_ACCOUNT }}'
 
       - name: Set up Gcloud
-        uses: 'google-github-actions/setup-gcloud@v1'
+        uses: 'google-github-actions/setup-gcloud@v2'
         with:
           version: '>= 363.0.0'
 
-      - name: Download sapient cli test generation and execution jar
-        run: gsutil cp gs://ai-sapient-cli/sapient-cli-20241031.3.jar sapient-cli-LATEST.jar
-
+      - name: Download BaseRock cli test generation and execution jar
+        run: gsutil cp gs://ai-sapient-cli/baserock-cli-20241111.10.jar baserock-cli.jar
 
       - name: Execute all tests for the module
         uses: Maven-Action/maven-build-action@v1
@@ -47,6 +51,7 @@ jobs:
           SOURCE_BRANCH: master
           TARGET_BRANCH: master
           RUN_TEST_FOR_ALL_CLASSES: true
+          environmentType: dev
           SAPIENT_CLI_API_KEY: ${{ secrets.SAPIENT_CLI_API_KEY_GITHUB_DEV }}
         with:
           goals: 'clean test'

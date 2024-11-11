@@ -2,6 +2,7 @@
 target
 .DS_Store
 .sapient
+.baserock
 
 *.iml
 src/test/java
