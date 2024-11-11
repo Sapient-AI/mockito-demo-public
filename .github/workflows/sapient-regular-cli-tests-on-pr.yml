@@ -46,7 +46,7 @@ jobs:
         run: rm -f baserock-cli.jar
 
       - name: Checking the version of gsutil
-        run: gsutil version -l
+        run: df -h
 
       - name: Download BaseRock cli test generation and execution jar
         run: gsutil -o "GSUtil:parallel_composite_upload_threshold=200M" -o "GSUtil:parallel_thread_count=1" cp gs://ai-sapient-cli/baserock-cli-20241111.6.jar baserock-cli.jar
