@@ -39,17 +39,11 @@ jobs:
 
       - name: Set up Gcloud
         uses: 'google-github-actions/setup-gcloud@v2'
-#        with:
-#          version: '>= 363.0.0'
-
-      - name: Remove any existing local file
-        run: rm -f baserock-cli.jar
+        with:
+          version: '>= 363.0.0'
 
       - name: Download BaseRock cli test generation and execution jar
         run: gsutil cp gs://ai-sapient-cli/baserock-cli-20241111.7.jar baserock-cli.jar
-
-      - name: Checking the hash of the downloaded jar
-        run: gsutil hash baserock-cli.jar
 
       - name: Execute all tests for the module
         env:
