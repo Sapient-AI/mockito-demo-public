@@ -158,7 +158,7 @@
                             <arguments>
                                 <argument>-classpath</argument>
                                 <classpath />
-                                <argument>ai/sapient/unit/SapientCLITestGeneratorMavenCodeless</argument>
+                                <argument>ai.baserock.unit.CLITestGeneratorMavenCodeless</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -174,7 +174,7 @@
                             <arguments>
                                 <argument>-classpath</argument>
                                 <classpath />
-                                <argument>ai.sapient.unit.SapientCLICompileMavenCodeless</argument>
+                                <argument>ai.baserock.unit.CLICompileMavenCodeless</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -191,7 +191,7 @@
                             <arguments>
                                 <argument>-classpath</argument>
                                 <classpath />
-                                <argument>ai.sapient.unit.SapientCLIExecutorMavenCodeless</argument>
+                                <argument>ai.baserock.unit.CLIExecutorMavenCodeless</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -295,8 +295,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>ai.sapient.unit</groupId>
-            <artifactId>sapient-cli</artifactId>
+            <groupId>ai.baserock.unit</groupId>
+            <artifactId>baserock-cli</artifactId>
             <version>LATEST</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/baserock-cli.jar</systemPath>
