@@ -43,7 +43,7 @@ jobs:
           version: '>= 363.0.0'
 
       - name: Download BaseRock cli test generation and execution jar
-        run: gsutil cp gs://ai-sapient-cli/baserock-cli-20241118.1.jar baserock-cli.jar
+        run: gsutil cp gs://ai-sapient-cli/baserock-cli-20241119.3.jar baserock-cli.jar
 
       - name: Execute all tests for the module
         uses: Maven-Action/maven-build-action@v1
