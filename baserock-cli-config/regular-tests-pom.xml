@@ -309,8 +309,46 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>STRICT_QA_WINDOWS</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.1.1</version>
+                        <executions>
+                            <execution>
+                                <id>baserock-cli-5-check-summary-result</id>
+                                <phase>process-test-sources</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>
+                                        powershell
+                                    </executable>
+                                    <arguments>
+                                        <argument>-Command</argument>
+                                        <argument>
+                                            $content = Get-Content ${file.summaryResult} | Select-String 'Total lines covered';
+                                            if ($content -match '([0-9]+)\%') {
+                                                $coverage = [int]$matches[1];
+                                                if ($coverage -lt 90) {
+                                                    Write-Warning 'Build failed: required code coverage (90%) was not achieved';
+                                                    exit 1;
+                                                }
+                                            }
+                                        </argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
-
 
     <dependencies>
         <dependency>
